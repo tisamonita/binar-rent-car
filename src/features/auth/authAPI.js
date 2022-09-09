@@ -3,18 +3,18 @@
 //using localstorage to save JWT (token)
 
 import axios from 'axios';
-
-const API_URL = "https://bootcamp-rent-car.herokuapp.com/";
+//api url menyesuaikan
+const API_URL = "http://localhost:8000/";
 
 const register = (email, password) => {
-    return axios.post(`${API_URL}customer/auth/register`, {
+    return axios.post(`${API_URL}auth/register`, {
         email,
         password,
     })
 }
 
 const login = (email, password) => {
-    return axios.post(`${API_URL}customer/auth/login`, {
+    return axios.post(`${API_URL}auth/login`, {
         email,
         password
     })
@@ -43,7 +43,7 @@ export default authAPI;
 export function getAuthHeader(){
     const user = JSON.parse(localStorage.getItem("user"));
     if(user && user.access_token){
-        return {Authorization :  'Bearer ' + user.access_token }
+        return {Authorization :  `Bearer ${user.access_token}` }
     }
     else{
         return {};

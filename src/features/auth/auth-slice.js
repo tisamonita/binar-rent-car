@@ -3,7 +3,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { setMessage } from './message-slice';
 import authAPI from './authAPI';
-import thunk from 'redux-thunk';
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -69,6 +68,7 @@ const authSlice = createSlice({
             state.user = null;
         },
     },
+
 });
 
 const {reducer} = authSlice;

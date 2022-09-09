@@ -9,7 +9,7 @@ const handleSubmit = async (values, actions, navigate) => {
   try {
     const response = await axios({
       method: "POST",
-      url: "https://bootcamp-rent-car.herokuapp.com/admin/auth/login",
+      url: "http://localhost:8000/auth/register",
       data: values,
     })
     actions.setSubmitting(false);

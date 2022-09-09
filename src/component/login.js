@@ -4,7 +4,8 @@ import * as Yup from 'yup'; //validasi object di form
 import axios from 'axios';
 import { Router, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+//const dispatch = useDispatch()- > untuk memanggil action
+//useSelector -> untuk memanggil state global
 import {login} from '../features/auth/auth-slice';
 
 
@@ -36,7 +37,7 @@ dispatch(login({email, password}))
     .unwrap()
     .then(() => {
       console.log('sukses');
-      navigate('/');
+      navigate('/dashboard');
     })
     .catch(() => {
         console.log('error');
@@ -71,6 +72,12 @@ dispatch(login({email, password}))
    if(isLoggedIn){
     console.log('udah login');
     }
+
+    //mastikan user belum login, kalau sudah, pindah halaman
+    React.useEffect(() => {
+      navigate('/dashboard')
+    }, [isLoggedIn])
+
    return (
     <form onSubmit={formik.handleSubmit}>
     <label htmlFor="email">Email Address</label>
