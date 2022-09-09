@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-// import reducer from '../auth/message-slice';
+import messageReducer, { setMessage } from '../auth/message-slice';
 import carsAPI from './carsAPI';
 
 export const getAllCars = createAsyncThunk("cars/getAll", 
@@ -10,14 +10,17 @@ export const getAllCars = createAsyncThunk("cars/getAll",
             return response
         }
         catch(err){
-            const message = err.response.data || err.response || err.toString();
-            return message;
+            console.log(err.message);
+            const message = err.message.data || err.message || err.message.toString();
+            thunkAPI.dispatch(setMessage(message)); 
+            // -> why message ngga ke set
+            return thunkAPI.rejectWithValue();
         }
     }
 );
 
 const initialState= {
-    cars : null
+    mobil : null
 }
 
 const carsSlice = createSlice({
@@ -25,14 +28,13 @@ const carsSlice = createSlice({
     initialState,
     extraReducers : {
         [getAllCars.fulfilled] : (state, action) => {
-            state.cars = action.payload.data;
+            state.mobil = action.payload.data;
         },
         [getAllCars.rejected] : (state, action) => {
-            state.cars = null;
+            state.mobil = null;
         }
     },
 });
 
-console.log(carsSlice, 'slice');
 const {reducer} = carsSlice;
 export default reducer;
