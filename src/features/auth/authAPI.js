@@ -4,7 +4,7 @@
 
 import axios from 'axios';
 //api url menyesuaikan
-const API_URL = "http://localhost:8000/";
+const API_URL = "https://bootcamp-rent-car.herokuapp.com/customer/";
 
 const register = (email, password) => {
     return axios.post(`${API_URL}auth/register`, {

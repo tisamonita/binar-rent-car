@@ -4,6 +4,7 @@ import Balance from './component/balances';
 import SignupForm from './component/register';
 import LoginForm from './component/login';
 import AllCars from './component/allCars';
+import ImageExample from './component/example-modal-image';
 
 import {Routes, Route} from 'react-router-dom';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='signup' element={<SignupForm/>} />
           <Route path='login' element={<LoginForm/>} />
           <Route path='allCars' element={<AllCars/>} />
+          <Route path='img-example' element={<ImageExample />} />
         </Route>
         <Route path='*' element={<>Not Found</>} />
       </Routes>

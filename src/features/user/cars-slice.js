@@ -4,16 +4,16 @@ import messageReducer, { setMessage } from '../auth/message-slice';
 import carsAPI from './carsAPI';
 
 export const getAllCars = createAsyncThunk("cars/getAll", 
-    async(thunkAPI) => {
+    async(args, thunkAPI) => {
+        console.log(thunkAPI)
         try{
             const response = await carsAPI.getAllCars();
+            thunkAPI.dispatch(setMessage('cars berhasil')); 
             return response
         }
         catch(err){
-            console.log(err.message);
             const message = err.message.data || err.message || err.message.toString();
-            thunkAPI.dispatch(setMessage(message)); 
-            // -> why message ngga ke set
+            thunkAPI.dispatch(setMessage(message));
             return thunkAPI.rejectWithValue();
         }
     }

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //useSelector -> untuk memanggil state global
 import {login} from '../features/auth/auth-slice';
 
+//eslint
 
 const handleSubmit = async (values, actions, dispatch, navigate) => {
 
@@ -75,7 +76,9 @@ dispatch(login({email, password}))
 
     //mastikan user belum login, kalau sudah, pindah halaman
     React.useEffect(() => {
-      navigate('/dashboard')
+      if(isLoggedIn){
+        navigate('/dashboard');
+      }
     }, [isLoggedIn])
 
    return (

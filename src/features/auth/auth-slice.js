@@ -1,5 +1,11 @@
 //reducer and action to call All authAPI in one file
 
+//redux -> state management => react, vue, angular,
+//redux-react -> 
+// redux-thunk, redux-saga, 
+//reduxjs/toolkit -> menyederhanakan, reducer dan action menjadi 1 slice, 
+//memasukkan redux thunk kedalam 1 function, createAsyncThunk
+
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { setMessage } from './message-slice';
 import authAPI from './authAPI';
@@ -26,6 +32,7 @@ export const login = createAsyncThunk("auth/login",
     async({email, password}, thunkAPI) => {
         try{
             const data = await authAPI.login(email, password);
+            thunkAPI.dispatch(setMessage('berhasil login'));
             return {user : data};
         }
         catch(err){
