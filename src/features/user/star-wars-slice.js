@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import messageReducer, { setMessage } from '../auth/message-slice';
 import starWarsAPI from './star-wars-API';
 
-export const getAllPlanets = createAsyncThunk("films/getAll", 
+export const getAllPlanets = createAsyncThunk("planets/getAll", 
     async(args, thunkAPI) => {
         try{
             const response = await starWarsAPI.getAllPlanets();
