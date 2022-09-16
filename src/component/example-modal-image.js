@@ -16,12 +16,12 @@ const ImageExample = () => {
             hideDownload={false}
             showRotate={true}
             />
-
             <h1>Example for image with Lightbox</h1>
             {openLightbox && 
             <Lightbox 
-            small = {"https://picsum.photos/id/1/200/300"}
-            large = {"https://picsum.photos/id/1/400/800"}
+            smallSrcSet = {"https://picsum.photos/id/1/200/300"}
+            medium = {"https://picsum.photos/id/2/400/800"}
+            large = {"https://picsum.photos/id/4/200/1600"}
             alt="Hello World!"
             onClose={closeLightBox}
             imageBackgroundColor="red"
@@ -36,5 +36,4 @@ const ImageExample = () => {
         </>
     )
 }
-
 export default ImageExample;

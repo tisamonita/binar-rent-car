@@ -6,6 +6,7 @@ import { Router, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 //const dispatch = useDispatch()- > untuk memanggil action
 //useSelector -> untuk memanggil state global
+
 import {login} from '../features/auth/auth-slice';
 
 //eslint
@@ -50,6 +51,8 @@ dispatch(login({email, password}))
     const navigate  = useNavigate();
 
     const {isLoggedIn} = useSelector((state) => state.auth)
+    const {planets} = useSelector((state)=>state.starWars);
+
 
    const formik = useFormik({
      initialValues: {

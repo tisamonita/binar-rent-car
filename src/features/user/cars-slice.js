@@ -9,6 +9,7 @@ export const getAllCars = createAsyncThunk("cars/getAll",
         try{
             const response = await carsAPI.getAllCars();
             thunkAPI.dispatch(setMessage('cars berhasil')); 
+            console.log(response)
             return response
         }
         catch(err){
