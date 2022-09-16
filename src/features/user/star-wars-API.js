@@ -7,6 +7,9 @@ const getAllPlanets = () => {
     return response;
 };
 
+//getAllFilms
+//getFilmById
+
 const starWarsAPI = {
     getAllPlanets,
 }
