@@ -3,9 +3,10 @@ import messageReducer, { setMessage } from '../auth/message-slice';
 import starWarsAPI from './star-wars-API';
 
 export const getAllPlanets = createAsyncThunk("planets/getAll", 
-    async(args, thunkAPI) => {
+    async({page}, thunkAPI) => {
+        console.log('here', page)
         try{
-            const response = await starWarsAPI.getAllPlanets();
+            const response = await starWarsAPI.getAllPlanets(page);
             thunkAPI.dispatch(setMessage('cars berhasil')); 
             return response
         }
