@@ -1,0 +1,30 @@
+import { Chart } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { array } from "yup";
+import reducer from "./features/auth/message-slice";
+
+"data judul films dan karakter"
+Solusi 1
+
+1. pakai dispatch (getAllFimls);
+2. {films} ambil data dengan useSelector
+3. buat array kosong untuk data []
+4. buat array kosong untuk labels []
+5. looping data films (bisa pakai map, foreach) dialising dengan Item => 
+    label.push(item.title);
+    data.push(item.charackter.length);
+    End looping
+    tinggal dimasukkan kedalam komponen Chart
+
+
+Solusi 2
+
+1. menambahkan initial State (bebas bentuknya gimana, bisa 2 variabel array, bisa gabung 1 array)
+2. menrubah proses di extra reducer. when fulfilled -> kita set Statenya dengan logika yang sama
+ dengan solusi 1 step 3 - 5. lalu di setState sesuai data yang sudah bersih
+
+ tinggal di get dan dimasukkan kedalam komponen chart
+
+
+
+
