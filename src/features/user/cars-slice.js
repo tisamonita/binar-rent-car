@@ -3,14 +3,14 @@ import axios from 'axios';
 import messageReducer, { setMessage } from '../auth/message-slice';
 import carsAPI from './carsAPI';
 
+//ini adalah action
 export const getAllCars = createAsyncThunk("cars/getAll", 
     async(args, thunkAPI) => {
-        console.log(thunkAPI)
         try{
             const response = await carsAPI.getAllCars();
             thunkAPI.dispatch(setMessage('cars berhasil')); 
             console.log(response)
-            return response
+            return response.data
         }
         catch(err){
             const message = err.message.data || err.message || err.message.toString();
@@ -21,7 +21,8 @@ export const getAllCars = createAsyncThunk("cars/getAll",
 );
 
 const initialState= {
-    mobil : null
+    mobil : null,
+    films :null,
 }
 
 const carsSlice = createSlice({
@@ -29,7 +30,7 @@ const carsSlice = createSlice({
     initialState,
     extraReducers : {
         [getAllCars.fulfilled] : (state, action) => {
-            state.mobil = action.payload.data;
+            state.mobil = action.payload;
         },
         [getAllCars.rejected] : (state, action) => {
             state.mobil = null;

@@ -9,7 +9,7 @@ const API_URL = "https://bootcamp-rent-car.herokuapp.com/customer/";
 const register = (email, password) => {
     return axios.post(`${API_URL}auth/register`, {
         email,
-        password,
+        password
     })
 }
 

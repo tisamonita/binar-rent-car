@@ -4,29 +4,64 @@ import {getAllPlanets} from '../features/user/star-wars-slice';
 import DataTable from 'react-data-table-component';
 import {Button} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Bar } from 'react-chartjs-2';
+  import { faker } from '@faker-js/faker';
+  
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+  
+  export const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+  };
+
 
 
 export default function Dashboard(){
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
+    const [pageFilm, setPageFilm] = useState(1);
     const dispatch = useDispatch();
 
-    React.useEffect(()=> {
+    //use memo untuk data yang langsung di get sekali banyak, ex : data api "country"
+    React.useMemo(()=> {
         setLoading(true);
         dispatch(getAllPlanets({page}))
         .then(()=>{
             setLoading(false);
         });
-
     }, [page]);
 
     const handlePageChange = page => {
-        console.log(page, 'next to page ? ');
 		setPage(page);
 	};
 
     // count total (60) / 10 = 6 kali /[paginationnya ada 6]
-
+    // use Selector dipakai untuk mengambil state global -> karena sifatnya state
+    //data berubah, maka akan nge get ulang.
     const {planets} = useSelector((state) => state.starWars);
 
     const columns = [
@@ -37,17 +72,17 @@ export default function Dashboard(){
         },
         {
             name: 'Rotation Period',
-            selector: 'rotation_period',
+            selector: row => row.rotation_period,
             sortable: true,
         },
         {
             name: 'Diameter',
-            selector: 'diameter',
+            selector: row => row.diameter,
             sortable: true,
         },
         {
             name: 'Gravity',
-            selector: 'gravity',
+            selector: row => row.gravity,
             sortable: true,
         },
         {
@@ -63,6 +98,7 @@ export default function Dashboard(){
                       e.preventDefault();
                     }}
                     tag="a"
+                    key = {item}
                     >
                         klik url
                     </Button>
@@ -72,9 +108,36 @@ export default function Dashboard(){
               ),
         },
     ] 
+
+
+  const labels = [];
+  
+  planets && planets.results.map((item)=>{
+    labels.push(item.name);
+  }); 
+
+  const data = planets && {
+    labels,
+    datasets: [
+      {
+        label: 'Total Films',
+        data: planets.results.map((item) => {
+            return item.films.length
+        }),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Total residents ',
+        data: planets.results.map((item) => {
+            return item.residents.length
+        }),
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
     return(
         <>
-           {console.log(planets, 'data planets')}
         HALO
         { planets && 
         <DataTable 
@@ -87,6 +150,11 @@ export default function Dashboard(){
 			paginationTotalRows={planets.count}
             onChangePage={handlePageChange}
         /> }
+
+        {
+            planets && 
+            <Bar options={options} data={data} />
+        }
         </>
     )
 }

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCars } from "../features/user/cars-slice";
 
@@ -6,9 +7,7 @@ import DataTable from 'react-data-table-component';
 
 const AllCars = () => {
 
-    const dispatch = useDispatch(); //ini fitur redux untuk ambil data dari global state
-
-
+    const dispatch = useDispatch(); //ini fitur redux untuk memanggil action di dalam reducer / slice
     //set loading stop & loading start
     const [loading, setLoading] = React.useState(true);
     
@@ -51,7 +50,8 @@ const AllCars = () => {
     return(
         <>
         Halaman All Cars
-        <button onClick={()=>{
+        <button 
+        onClick={()=>{
             dispatch(getAllCars())
             }} >
         Get Data 

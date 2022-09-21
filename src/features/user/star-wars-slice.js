@@ -4,11 +4,10 @@ import starWarsAPI from './star-wars-API';
 
 export const getAllPlanets = createAsyncThunk("planets/getAll", 
     async({page}, thunkAPI) => {
-        console.log('here', page)
         try{
             const response = await starWarsAPI.getAllPlanets(page);
             thunkAPI.dispatch(setMessage('cars berhasil')); 
-            return response
+            return response.data;
         }
         catch(err){
             const message = err.message.data || err.message || err.message.toString();
@@ -23,7 +22,13 @@ export const getAllPlanets = createAsyncThunk("planets/getAll",
 
 
 const initialState= {
-    planets : null
+    planets : null,
+    films : null,
+    visualisationData : [{
+        data : [],
+        label : [],
+    }
+    ]
 }
 
 const starWarsSlice = createSlice({
@@ -31,7 +36,7 @@ const starWarsSlice = createSlice({
     initialState,
     extraReducers : {
         [getAllPlanets.fulfilled] : (state, action) => {
-            state.planets = action.payload.data;
+            state.planets = action.payload;
         },
         [getAllPlanets.rejected] : (state, action) => {
             state.planets = null;

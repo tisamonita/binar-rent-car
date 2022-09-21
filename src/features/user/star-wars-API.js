@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_URL = "https://swapi.dev/api/";
 
+//karakteristik api starwars : 
 // total : 60 data hasil count.
 // planets : mengambil  1-10
 // "/planets/?page=2" => data 11 - 20

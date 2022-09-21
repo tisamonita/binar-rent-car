@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getAuthHeader} from '../auth/authAPI';
+// import {getAuthHeader} from '../auth/authAPI';
 
 const API_URL = "https://bootcamp-rent-car.herokuapp.com/admin/";
 
