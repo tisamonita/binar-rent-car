@@ -1,11 +1,10 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import Balance from './component/balances';
 import SignupForm from './component/register';
 import LoginForm from './component/login';
 import AllCars from './component/allCars';
 import ImageExample from './component/example-modal-image';
-import ExamplePDF from './component/example-pdf';
 import PdfDua from './component/example-pdf-2';
 import Dashboard from './component/dashboard';
 
@@ -29,6 +28,7 @@ function App() {
         </Route>
         <Route path='*' element={<>Not Found</>} />
       </Routes>
+      {/* // eslint-disable-line */}
     </>
 
   );

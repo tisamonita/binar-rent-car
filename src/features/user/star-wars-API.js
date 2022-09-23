@@ -17,11 +17,17 @@ const getAllPlanets = (page) => {
     return response;
 };
 
+const getFilmById = (id) => {
+    const response = axios.get(`${API_URL}films/${id}`);
+    return response;
+};
+
 //getAllFilms
 //getFilmById
 
 const starWarsAPI = {
     getAllPlanets,
+    getFilmById
 }
 
 export default starWarsAPI;

@@ -1,8 +1,12 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllPlanets} from '../features/user/star-wars-slice';
+import {getAllPlanets, getFilmById} from '../features/user/star-wars-slice';
 import DataTable from 'react-data-table-component';
-import {Button} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+
+import { LineWave } from  'react-loader-spinner'
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Chart as ChartJS,
@@ -14,7 +18,7 @@ import {
     Legend,
   } from 'chart.js';
   import { Bar } from 'react-chartjs-2';
-  import { faker } from '@faker-js/faker';
+
   
   ChartJS.register(
     CategoryScale,
@@ -38,13 +42,14 @@ import {
     },
   };
 
-
-
 export default function Dashboard(){
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const [pageFilm, setPageFilm] = useState(1);
     const dispatch = useDispatch();
+
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
 
     //use memo untuk data yang langsung di get sekali banyak, ex : data api "country"
     React.useMemo(()=> {
@@ -62,7 +67,7 @@ export default function Dashboard(){
     // count total (60) / 10 = 6 kali /[paginationnya ada 6]
     // use Selector dipakai untuk mengambil state global -> karena sifatnya state
     //data berubah, maka akan nge get ulang.
-    const {planets} = useSelector((state) => state.starWars);
+    const {planets, filmById} = useSelector((state) => state.starWars);
 
     const columns = [
         {
@@ -90,17 +95,23 @@ export default function Dashboard(){
             sortable: true,
             cell: (row) => (
                <>
-               {row.films && row.films.map((item)=>{
+               {row.films && row.films.slice(0,2).map((item)=>{
                 return(
                     <Button
                     onClick={(e) => {
+                      // const id = logika parsing
+                      // kirimkan id nya ke dipathc(getFilmById(id))
                         //dispatch action to view detail by id
+                        //https://swapi.dev/films/1/
+                      const id = item.split("/")[5];
+                      dispatch(getFilmById({id}));
+                      setModal(true);
                       e.preventDefault();
                     }}
                     tag="a"
                     key = {item}
                     >
-                        klik url
+                      Klik saya
                     </Button>
                 )
                })}
@@ -115,6 +126,7 @@ export default function Dashboard(){
   planets && planets.results.map((item)=>{
     labels.push(item.name);
   }); 
+
 
   const data = planets && {
     labels,
@@ -147,7 +159,7 @@ export default function Dashboard(){
             progressPending={loading}
             pagination
             paginationServer
-			paginationTotalRows={planets.count}
+		        paginationTotalRows={planets.count}
             onChangePage={handlePageChange}
         /> }
 
@@ -155,6 +167,23 @@ export default function Dashboard(){
             planets && 
             <Bar options={options} data={data} />
         }
+      <Modal isOpen={modal} toggle={toggle} backdrop="static" keyboard={false}  >
+        <ModalHeader toggle={toggle}>{filmById ? filmById.title : 
+         'Loading'
+        }</ModalHeader>
+        <ModalBody>
+          {filmById ? filmById.release_date : null}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>
+            Do Something
+          </Button>{' '}
+          <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+        {/* <Modal dibuat, tapi kondisi awal modalOpen=false */}
         </>
     )
 }
