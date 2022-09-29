@@ -4,19 +4,18 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script';
 
  const LoginGoogle = () => {
+    const [ profile, setProfile ] = useState([]);
 
     const clientId = '65094717642-2l8biodm1408rgj3fkr2gb0739vbqcvp.apps.googleusercontent.com';
         useEffect(() => {
             const initClient = () => {
                 gapi.client.init({
                 clientId: clientId,
-                scope: 'profile email'
+                scope: ''
             });
             };
             gapi.load('client:auth2', initClient);
-        });
-
-    const [ profile, setProfile ] = useState([]);
+        }, []);
 
     const onSuccess = (res) => {
         setProfile(res.profileObj);
@@ -38,7 +37,7 @@ import { gapi } from 'gapi-script';
             <br />
             {profile ? (
                 <div>
-                    <img src={profile.imageUrl} alt="user image" />
+                    <img src={profile.imageUrl} alt="user image" referrerpolicy="no-referrer" />
                     <h3>User Logged in</h3>
                     <p>Name: {profile.name}</p>
                     <p>Email Address: {profile.email}</p>
