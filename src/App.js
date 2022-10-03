@@ -3,10 +3,12 @@ import './App.css';
 import Balance from './component/balances';
 import SignupForm from './component/register';
 import LoginForm from './component/login';
+import LoginGoogle from './component/logingoogle';
 import AllCars from './component/allCars';
 import ImageExample from './component/example-modal-image';
 import PdfDua from './component/example-pdf-2';
 import Dashboard from './component/dashboard';
+import TimeStatic from './component/time-moment';
 
 import {Routes, Route} from 'react-router-dom';
 
@@ -25,6 +27,8 @@ function App() {
           <Route path='img-example' element={<ImageExample />} />
           <Route path='pdf-example' element={<PdfDua/>} />
           <Route path='dashboard' element={<Dashboard/>} />
+          <Route path='logingoogle' element={<LoginGoogle/>} />
+          <Route path='timestatic' element={<TimeStatic/>} />
         </Route>
         <Route path='*' element={<>Not Found</>} />
       </Routes>
