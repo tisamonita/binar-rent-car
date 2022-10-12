@@ -43,6 +43,25 @@
     .text-title{
         font-size: 2.85rem;
         font-weight: 700;
+        line-height: 1.1;
+        color: white;
+        max-width: 640px;
+        text-align: center;
+    }
+    .text-desc{
+        text-align: center;
+        max-width: 640px;
+        font-size: 26px;
+    }
+    .text-desc-end{
+        text-align: center;
+        max-width: 640px;
+        font-size: 18px;
+        margin:0;
+    }
+    .btn-email{
+        margin-top: 15px;
+        background-color: rgb(229, 9, 20);
         color: white;
     }
 }
@@ -61,8 +80,11 @@
     background-color:  #000000 ;
     color : white;
     border-bottom: 8px solid #222;
+    border-top: 8px solid #222;
     color: #fff;
     margin-bottom: 0;
+    position: relative;
+    z-index: 2;
     .row-reverse{
         flex-direction: row-reverse;
         .img-kids{
@@ -82,13 +104,43 @@
     }
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 746px) {
     .section-one{
         height: auto;
+        .center-header{
+            margin: 50px 0;
+        }
+        .email-box{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .btn-email{
+            margin: 10px auto;
+            background-color: rgb(229, 9, 20);
+            color: white;
+            width: 50%;
+            }
+        }    
+
+        input{
+            width: 100%;
+        }
     }
     .section-two{
         .row-reverse{
             flex-direction: column;
+            .img-kids{
+                margin: 20px;
+            }
+            .title{
+                font-size: 26px;
+                text-align: center;
+            }
+            
+            .description{
+               text-align: center;
+               font-size: 18px;
+            }
         }
     }
 }

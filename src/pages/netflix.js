@@ -2,7 +2,7 @@ import React from "react";
 import "../index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Container, Button, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu, Row, Col} from "reactstrap";
+import { Container, Button, Row, Col} from "reactstrap";
 
 export default function Netlix() {
   return (
@@ -26,11 +26,12 @@ export default function Netlix() {
             <p className="text-desc">
             Watch anywhere. Cancel anytime.
             </p>
-            <p className="text-desc">
+            <p className="text-desc-end">
             Ready to watch? Enter your email to create or restart your membership.
             </p>
-            <div>
-                <input placeholder="Email Address"></input><button>Get Started</button>
+            <div className="email-box">
+                <input placeholder="Email Address"></input>
+                <button className="btn-email">Get Started</button>
             </div>
         </div>
       </Container>
