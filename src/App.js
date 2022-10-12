@@ -9,8 +9,10 @@ import ImageExample from './component/example-modal-image';
 import PdfDua from './component/example-pdf-2';
 import Dashboard from './component/dashboard';
 import TimeStatic from './component/time-moment';
+import Netlix from './pages/netflix';
 
 import {Routes, Route} from 'react-router-dom';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path='dashboard' element={<Dashboard/>} />
           <Route path='logingoogle' element={<LoginGoogle/>} />
           <Route path='timestatic' element={<TimeStatic/>} />
+          <Route path='netflix' element={<Netlix/>} />
         </Route>
         <Route path='*' element={<>Not Found</>} />
       </Routes>

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllPlanets, getFilmById} from '../features/user/star-wars-slice';
+import {getAllPlanets, getFilmById, clearFilmById} from '../features/user/star-wars-slice';
 import DataTable from 'react-data-table-component';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
@@ -18,6 +18,7 @@ import {
     Legend,
   } from 'chart.js';
   import { Bar } from 'react-chartjs-2';
+import { Navigate } from "react-router-dom";
 
   
   ChartJS.register(
@@ -49,7 +50,10 @@ export default function Dashboard(){
 
     const [modal, setModal] = useState(false);
 
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+      dispatch(clearFilmById());
+      setModal(!modal);
+    };
 
     //use memo untuk data yang langsung di get sekali banyak, ex : data api "country"
     React.useMemo(()=> {
@@ -64,6 +68,12 @@ export default function Dashboard(){
 		setPage(page);
 	};
 
+  const userLogin = useSelector((state) => state.auth.isLogin);
+  React.useEffect(()=>{
+    if(!userLogin) {
+      Navigate('/')
+    }
+  }, [])
     // count total (60) / 10 = 6 kali /[paginationnya ada 6]
     // use Selector dipakai untuk mengambil state global -> karena sifatnya state
     //data berubah, maka akan nge get ulang.
@@ -102,7 +112,7 @@ export default function Dashboard(){
                       // const id = logika parsing
                       // kirimkan id nya ke dipathc(getFilmById(id))
                         //dispatch action to view detail by id
-                        //https://swapi.dev/films/1/
+                        //https://swapi.dev/api/films/1/
                       const id = item.split("/")[5];
                       dispatch(getFilmById({id}));
                       setModal(true);
@@ -184,6 +194,8 @@ export default function Dashboard(){
         </ModalFooter>
       </Modal>
         {/* <Modal dibuat, tapi kondisi awal modalOpen=false */}
+
+        {/* proses menambahkan clear Data filmById masuk ke reducer biasa */}
         </>
     )
 }

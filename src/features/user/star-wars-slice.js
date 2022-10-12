@@ -30,11 +30,13 @@ export const getFilmById = createAsyncThunk("films/getById",
     }
 );
 
-// buat action untuk clear idFilms
-
-//get All Films
-//get Films by ID
-
+//films/clearbyId merupakan penamaan sendiri, tidak berdasarkan aturan khusus dari RTK. 
+// Hanya saja disesuaikan dengan fungsi nya
+export const clearFilmById = createAsyncThunk("film/clearById", 
+    async() => {
+        return true;
+    }
+);
 
 const initialState= {
     planets : null,
@@ -45,9 +47,6 @@ const initialState= {
 const starWarsSlice = createSlice({
     name : "starWars",
     initialState,
-    reducer : {
-        //ubah idfilms jadi null
-    },
     extraReducers : {
         [getAllPlanets.fulfilled] : (state, action) => {
             state.planets = action.payload;
@@ -60,10 +59,14 @@ const starWarsSlice = createSlice({
         },
         [getFilmById.rejected] : (state, action) => {
             state.filmById = [];
+        },
+        [clearFilmById.fulfilled] : (state) => {
+            state.filmById = [];
         }
     },
 });
 
+export const {clearDataFilm} = starWarsSlice.actions;
 const {reducer} = starWarsSlice;
 export default reducer;
 

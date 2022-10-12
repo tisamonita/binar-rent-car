@@ -14,6 +14,9 @@ export const getAllCars = createAsyncThunk("cars/getAll",
         }
         catch(err){
             const message = err.message.data || err.message || err.message.toString();
+            if(message.include('unauthorized')){
+                localStorage.removeItem("user");
+            }
             thunkAPI.dispatch(setMessage(message));
             return thunkAPI.rejectWithValue();
         }

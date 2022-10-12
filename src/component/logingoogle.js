@@ -19,6 +19,9 @@ import { gapi } from 'gapi-script';
 
     const onSuccess = (res) => {
         setProfile(res.profileObj);
+        // localStorage.setItem('accTokenGoogle', res.accessToken)
+        //set access token ke local storage
+        //nyimpan ke redux store
         console.log('success:', res);
     };
     const onFailure = (err) => {

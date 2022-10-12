@@ -11,6 +11,9 @@ const orderRentCar = (start_rent_at, finish_rent_at, car_id) => {
     } ,{headers : getAuthHeader()})
 }
 
+// 1. frontend
+// 1. backend
+
 const deleteRentCar = () => {
 
 }

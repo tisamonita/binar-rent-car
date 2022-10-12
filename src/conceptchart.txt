@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 import { array } from "yup";
 import reducer from "./features/auth/message-slice";
 
+
+label => keterangan dibawah
+data didalam dataset => length nya harus sama 
+
 "data judul films dan karakter"
 Solusi 1
 
-1. pakai dispatch (getAllFimls);
+1. pakai dispatch (getAllFilms);
 2. {films} ambil data dengan useSelector
 3. buat array kosong untuk data []
 4. buat array kosong untuk labels []
