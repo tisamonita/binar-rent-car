@@ -12,6 +12,7 @@ import TimeStatic from './component/time-moment';
 import Netlix from './pages/netflix';
 
 import {Routes, Route} from 'react-router-dom';
+import AddNewCar from './component/addnewCar';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='logingoogle' element={<LoginGoogle/>} />
           <Route path='timestatic' element={<TimeStatic/>} />
           <Route path='netflix' element={<Netlix/>} />
+          <Route path='newcar' element={<AddNewCar/>} />
         </Route>
         <Route path='*' element={<>Not Found</>} />
       </Routes>
